@@ -119,7 +119,6 @@ public class Game44Fragment extends Fragment {
                         if(now_num == 1){
 //                          시작
                             callback.start();
-                            Toast.makeText(context, "Start", Toast.LENGTH_LONG).show();
                         }
                         now_num += 1;
                         button[number].setVisibility(View.INVISIBLE);

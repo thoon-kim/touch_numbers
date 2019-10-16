@@ -1,23 +1,23 @@
 package org.techtown.numbertouch;
 
 public class Rank {
-    String rank;
+    int rank;
     String time;
     String type;
     String date;
 
-    public Rank(String rank, String time, String type, String date) {
+    public Rank(int rank, String time, String type, String date) {
         this.rank = rank;
         this.time = time;
         this.type = type;
         this.date = date;
     }
 
-    public String getRank() {
+    public int getRank() {
         return rank;
     }
 
-    public void setRank(String rank) {
+    public void setRank(int rank) {
         this.rank = rank;
     }
 

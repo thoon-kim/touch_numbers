@@ -6,15 +6,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import static java.util.Collections.sort;
 
 public class RankActivity extends AppCompatActivity {
     Button button;
+    SQLiteDatabase database;
+    public static final String DBNAME = "ranking.db";
+    public static final String TBNAME = "rank";
+    RankAdapter adapter;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,21 +35,11 @@ public class RankActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.rankRecyclerView);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
         recyclerView.setLayoutManager(layoutManager);
-        RankAdapter adapter = new RankAdapter();
 
-        adapter.addItem(new Rank("1", "00:04:09", "4X4", "2019.10.15"));
-        adapter.addItem(new Rank("2", "00:14:09", "4X4", "2019.10.15"));
-        adapter.addItem(new Rank("3", "00:44:09", "4X4", "2019.10.15"));
-        adapter.addItem(new Rank("4", "00:54:09", "4X4", "2019.10.15"));
-        adapter.addItem(new Rank("5", "00:64:09", "4X4", "2019.10.15"));
-        adapter.addItem(new Rank("6", "00:74:09", "4X4", "2019.10.15"));
-        adapter.addItem(new Rank("7", "00:84:09", "4X4", "2019.10.15"));
-        adapter.addItem(new Rank("8", "00:14:09", "4X4", "2019.10.15"));
-        adapter.addItem(new Rank("9", "00:24:09", "4X4", "2019.10.15"));
-        adapter.addItem(new Rank("10", "00:34:09", "4X4", "2019.10.15"));
-        adapter.addItem(new Rank("11", "00:22:09", "4X4", "2019.10.15"));
+        // DB 실행, 순위 기록 불러오기
+        executeDB();
+        getRecords();
 
         recyclerView.setAdapter(adapter);
 
@@ -50,8 +51,32 @@ public class RankActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
 
+    public void executeDB(){
+        database = openOrCreateDatabase(DBNAME, MODE_PRIVATE, null);
 
+        database.execSQL("create table if not exists " + TBNAME + " ("
+                                                                    + "time text, "
+                                                                    + "type text, "
+                                                                    + "date text)");
+    }
+
+    private void getRecords(){
+        String sql = "select time, type, date from " + TBNAME + " order by time asc";
+        Cursor cursor = database.rawQuery(sql, null);
+        adapter = new RankAdapter();
+
+        int recordCount = cursor.getCount();
+
+        for(int i = 0; i < recordCount; i++){
+            cursor.moveToNext();
+            String time = cursor.getString(0);
+            String type = cursor.getString(1);
+            String date = cursor.getString(2);
+            adapter.addItem(new Rank(i+1, time, type, date));
+        }
+        cursor.close();
     }
 }
 

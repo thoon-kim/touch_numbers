@@ -1,8 +1,10 @@
 package org.techtown.numbertouch;
 
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -69,7 +71,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder>  {
         }
 
         public void setItem(Rank item){
-            textView.setText(item.getRank());
+            textView.setText(String.valueOf(item.getRank()));
             textView2.setText(item.getTime());
             textView3.setText(item.getType());
             textView4.setText(item.getDate());
