@@ -16,7 +16,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".RankActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:launchMode="singleInstance" />
 
     </application>
 

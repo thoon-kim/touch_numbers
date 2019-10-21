@@ -10,13 +10,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3sp">
+        android:layout_margin="10sp">
 
         <Button
             android:id="@+id/button_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3sp"
+            android:background="@drawable/button_rectangle"
             android:text="뒤로가기"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:text="순    위"
             android:textSize="30sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,6 +50,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="순위"
+            android:textStyle="bold"
             android:textSize="20sp" />
 
         <TextView
@@ -58,6 +60,7 @@
             android:layout_weight="2"
             android:gravity="center"
             android:text="시간"
+            android:textStyle="bold"
             android:textSize="20sp" />
 
         <TextView
@@ -67,6 +70,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="타입"
+            android:textStyle="bold"
             android:textSize="20sp" />
 
         <TextView
@@ -76,6 +80,7 @@
             android:layout_weight="4"
             android:gravity="center"
             android:text="날짜"
+            android:textStyle="bold"
             android:textSize="20sp" />
 
     </LinearLayout>

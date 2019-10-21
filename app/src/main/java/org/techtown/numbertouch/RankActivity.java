@@ -32,6 +32,20 @@ public class RankActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rank);
 
+        button = findViewById(R.id.button_back);
+        button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RankActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
         RecyclerView recyclerView = findViewById(R.id.rankRecyclerView);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
@@ -42,15 +56,6 @@ public class RankActivity extends AppCompatActivity {
         getRecords();
 
         recyclerView.setAdapter(adapter);
-
-        button = findViewById(R.id.button_back);
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(RankActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     public void executeDB(){

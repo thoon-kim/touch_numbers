@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCallback{
                     isRunning = !isRunning;
                 }
                 type = "4X4";
+                timer_textView.setText("00:00:00");
                 fragment44 = new Game44Fragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.gameContainer, fragment44).commit();
             }
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCallback{
                     isRunning = !isRunning;
                 }
                 type = "5X5";
+                timer_textView.setText("00:00:00");
                 fragment55 = new Game55Fragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.gameContainer, fragment55).commit();
             }
@@ -97,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCallback{
                     isRunning = !isRunning;
                 }
                 type = "6X6";
+                timer_textView.setText("00:00:00");
                 fragment66 = new Game66Fragment();
                 getSupportFragmentManager().beginTransaction().replace(R.id.gameContainer, fragment66).commit();
             }
@@ -155,7 +158,6 @@ public class MainActivity extends AppCompatActivity implements FragmentCallback{
 
         game_finish = new GameFinish();
         getSupportFragmentManager().beginTransaction().replace(R.id.gameContainer, game_finish).commit();
-
     }
 
     // 게임 종료 시 마다 DB에 기록을 저장
@@ -195,15 +197,15 @@ public class MainActivity extends AppCompatActivity implements FragmentCallback{
 
             while(true) {
                 while(isRunning) { // 일시정지를 누르면 멈추도록
-                    Message msg = new Message();
-                    msg.arg1 = ++i;
-                    handler.sendMessage(msg);
-
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException e) {
                         return; // 인터럽트 받을 경우 return됨
                     }
+
+                    Message msg = new Message();
+                    msg.arg1 = i++;
+                    handler.sendMessage(msg);
                 }
             }
         }
